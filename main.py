@@ -5,17 +5,27 @@ def encode(user_password):
     for character in user_password:
         # make each character an integer
         char = int(character)
-        # if it is 9 change it so when it adds 3 it fits the structure
-        if char == 9:
-            char = -1
+        # if it is greater than 6 change it so when it adds 3 it fits the structure
+        if char > 6:
+            char -= 10
+            char += 3
         else:
             # otherwise just add 3 to every number
             char += 3
         # make every character into a string again and make it into the password
-        encoded_password += str(char)
+        encoded_password = encoded_password + str(char)
     return encoded_password
 
 def decode(encoded_password):
+    decoded_pass = ''
+    for char in encoded_password:
+        currentint = int(char)
+        if currentint < 3:
+            currentint = (currentint - 3) + 9
+        else:
+            currentint -= 3
+        decoded_pass = decoded_pass + str(currentint)
+    return decoded_pass
 
 def menu():
     print("Menu \n -------------")
